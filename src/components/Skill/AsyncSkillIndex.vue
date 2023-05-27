@@ -1,13 +1,12 @@
 <script setup>
-import { onMounted } from "vue";
 import { RouterLink } from "vue-router";
 import { storeToRefs } from "pinia";
-import { useSkillStore } from "@/stores/SkillStore.js";
+import { useSkillStore } from "@/stores/skill.store.js";
 
 const skillStore = useSkillStore();
 const { skills } = storeToRefs(skillStore);
 
-await new Promise((res) => setTimeout(res, 1000));
+await new Promise((res) => setTimeout(res, 300));
 
 await skillStore.getSkills();
 </script>

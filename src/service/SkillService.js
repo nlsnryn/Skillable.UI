@@ -1,23 +1,23 @@
 import { apiClient } from "./API.js";
 
 const SkillService = {
-  skillsIndex() {
+  index() {
     return apiClient.get("skills");
   },
 
-  skillShow(id) {
+  show(id) {
     return apiClient.get("skills/" + id);
   },
 
-  skillStore(payload) {
+  store(payload) {
     return apiClient.post("skills", payload);
   },
 
-  skillUpdate(payload, id) {
+  update(payload, id) {
     return apiClient.put("skills/" + id, payload);
   },
 
-  skillDelete(id) {
+  delete(id) {
     return apiClient.delete("skills/" + id);
   },
 };
