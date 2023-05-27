@@ -1,21 +1,25 @@
 <script setup>
-import { reactive } from "vue";
+import { onMounted, defineProps } from "vue";
 import { storeToRefs } from "pinia";
-import { useSkillStore } from "@/stores/SkillStore.js";
+import { useSkillStore } from "../../stores/SkillStore.js";
 
 const skillStore = useSkillStore();
-const { errors } = storeToRefs(skillStore);
+const { skill, errors } = storeToRefs(skillStore);
 
-const form = reactive({
-  name: "",
-  slug: "",
+const props = defineProps({
+  skillID: {
+    required: true,
+    type: String,
+  },
 });
+await new Promise((res) => setTimeout(res, 100));
+await skillStore.getSkill(props.skillID);
 </script>
 
 <template>
   <div class="mt-12">
     <form
-      @submit.prevent="skillStore.storeSkill(form)"
+      @submit.prevent="skillStore.updateSkill($route.params.id)"
       class="max-w-md mx-auto p-4 bg-white shadow-md rounded-md"
     >
       <div class="space-y-6">
@@ -24,7 +28,7 @@ const form = reactive({
             >Name</label
           >
           <input
-            v-model="form.name"
+            v-model="skill.name"
             type="text"
             id="name"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -38,7 +42,7 @@ const form = reactive({
             >Slug</label
           >
           <input
-            v-model="form.slug"
+            v-model="skill.slug"
             type="text"
             id="slug"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -51,7 +55,7 @@ const form = reactive({
           <button
             class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
           >
-            Store
+            Update
           </button>
         </div>
       </div>
