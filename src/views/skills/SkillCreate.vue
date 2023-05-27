@@ -11,8 +11,8 @@ const errorStore = useErrorStore();
 const loadingStore = useLoadingStore();
 
 const form = reactive({
-  name: "",
-  slug: "",
+  technology: "",
+  skill: "",
 });
 </script>
 
@@ -28,21 +28,21 @@ const form = reactive({
       <div class="space-y-6">
         <div class="mb-6">
           <label for="name" class="block mb-2 text-sm font-medium text-gray-900"
-            >Name</label
+            >Technologies</label
           >
           <DefaultInput
-            :modelValue="form.name"
-            @newValue="(newValue) => (form.name = newValue)"
+            :modelValue="form.technology"
+            @newValue="(newValue) => (form.technology = newValue)"
           />
         </div>
 
         <div class="mb-6">
           <label for="slug" class="block mb-2 text-sm font-medium text-gray-900"
-            >Slug</label
+            >Skill</label
           >
           <DefaultInput
-            :modelValue="form.slug"
-            @newValue="(newValue) => (form.slug = newValue)"
+            :modelValue="form.skill"
+            @newValue="(newValue) => (form.skill = newValue)"
           />
         </div>
         <div class="mt-4">

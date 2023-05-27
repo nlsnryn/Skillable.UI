@@ -2,12 +2,13 @@
 import { RouterLink } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useSkillStore } from "@/stores/skill.store.js";
+import { computed, ref } from "vue";
+import AnimatedLoading from "../AnimatedLoading.vue";
 
 const skillStore = useSkillStore();
-const { skills } = storeToRefs(skillStore);
+const displayNoSkills = computed(() => skillStore.skills.length === 0);
 
 await new Promise((res) => setTimeout(res, 300));
-
 await skillStore.getSkills();
 </script>
 
@@ -21,22 +22,31 @@ await skillStore.getSkills();
       >
     </div>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="text-center mt-10" v-if="displayNoSkills">
+      <h1 class="text-indigo-600 font-bold text-2xl">
+        No skill available, kindly add new skill.
+      </h1>
+    </div>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg" v-else>
       <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-50 uppercase bg-indigo-600">
           <tr>
-            <th scope="col" class="px-6 py-3">Skill name</th>
-            <th scope="col" class="px-6 py-3">Slug</th>
+            <th scope="col" class="px-6 py-3">Technologies</th>
+            <th scope="col" class="px-6 py-3">Skill</th>
             <th scope="col" class=""></th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="skill in skills" :key="skill.id" class="bg-white border-b">
+          <tr
+            v-for="skill in skillStore.skills"
+            :key="skill.id"
+            class="bg-white border-b"
+          >
             <td class="py-4 px-6 text-gray-800 font-semibold">
-              {{ skill.name }}
+              {{ skill.technology }}
             </td>
             <td class="py-4 px-6 text-gray-800 font-semibold">
-              {{ skill.slug }}
+              {{ skill.skill }}
             </td>
             <td>
               <RouterLink

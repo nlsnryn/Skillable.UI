@@ -24,7 +24,7 @@ onMounted(async () => {
         Store, Update, and Delete all your skills in skills section
       </h2>
       <div class="flex justify-center items-center mt-20">
-        <h1 class="text-lg text-indigo-600 font-semibold mr-2">
+        <h1 class="text-lg text-indigo-600 font-bold mr-2 uppercase">
           Your total Skills
         </h1>
         <div class="bg-indigo-600 text-white w-fit py-3 px-8 rounded-lg">

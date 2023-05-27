@@ -34,21 +34,21 @@ await skillStore.getSkill(props.skillID);
       <div class="space-y-6">
         <div class="mb-6">
           <label for="name" class="block mb-2 text-sm font-medium text-gray-900"
-            >Name</label
+            >Technologies</label
           >
           <DefaultInput
-            :modelValue="skill.name"
-            @newValue="(newValue) => (skill.name = newValue)"
+            :modelValue="skill.technology"
+            @newValue="(newValue) => (skill.technology = newValue)"
           />
         </div>
 
         <div class="mb-6">
           <label for="slug" class="block mb-2 text-sm font-medium text-gray-900"
-            >Slug</label
+            >Skill</label
           >
           <DefaultInput
-            :modelValue="skill.slug"
-            @newValue="(newValue) => (skill.slug = newValue)"
+            :modelValue="skill.skill"
+            @newValue="(newValue) => (skill.skill = newValue)"
           />
         </div>
         <div class="mt-4">
