@@ -31,6 +31,8 @@ apiClient.interceptors.response.use(
     useLoadingStore().setStatus(status.error);
 
     switch (error.response.status) {
+      case 403:
+        errorStore.setState(error.response.data);
       case 422:
         errorStore.setState(error.response.data);
         break;

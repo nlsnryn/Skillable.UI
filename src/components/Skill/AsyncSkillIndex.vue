@@ -1,9 +1,7 @@
 <script setup>
 import { RouterLink } from "vue-router";
-import { storeToRefs } from "pinia";
 import { useSkillStore } from "@/stores/skill.store.js";
-import { computed, ref } from "vue";
-import AnimatedLoading from "../AnimatedLoading.vue";
+import { computed } from "vue";
 
 const skillStore = useSkillStore();
 const displayNoSkills = computed(() => skillStore.skills.length === 0);

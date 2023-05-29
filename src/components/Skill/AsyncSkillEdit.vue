@@ -37,6 +37,7 @@ await skillStore.getSkill(props.skillID);
             >Technologies</label
           >
           <DefaultInput
+            type="text"
             :modelValue="skill.technology"
             @newValue="(newValue) => (skill.technology = newValue)"
           />
@@ -47,6 +48,7 @@ await skillStore.getSkill(props.skillID);
             >Skill</label
           >
           <DefaultInput
+            type="text"
             :modelValue="skill.skill"
             @newValue="(newValue) => (skill.skill = newValue)"
           />

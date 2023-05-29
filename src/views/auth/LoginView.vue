@@ -1,18 +1,20 @@
 <script setup>
-import { reactive } from "vue";
-import { useSkillStore } from "@/stores/skill.store.js";
-import { useErrorStore } from "@/stores/error.store.js";
-import { useLoadingStore } from "@/stores/loading.store.js";
 import DefaultInput from "@/components/DefaultInput.vue";
 import DefaultButton from "@/components/default-button.vue";
+import { reactive } from "vue";
+import { useAuthStore } from "@/stores/auth.store.js";
+import { useErrorStore } from "@/stores/error.store.js";
+import { useLoadingStore } from "@/stores/loading.store.js";
 
-const skillStore = useSkillStore();
+const authStore = useAuthStore();
 const errorStore = useErrorStore();
 const loadingStore = useLoadingStore();
 
+errorStore.clearState();
+
 const form = reactive({
-  technology: "",
-  skill: "",
+  email: "",
+  password: "",
 });
 </script>
 
@@ -22,29 +24,29 @@ const form = reactive({
       <span class="text-sm text-red-500">{{ errorStore.state.message }}</span>
     </div>
     <form
-      @submit.prevent="skillStore.storeSkill(form)"
+      @submit.prevent="authStore.login(form.email, form.password)"
       class="max-w-md mx-auto p-4 bg-white shadow-md rounded-md"
     >
       <div class="space-y-6">
         <div class="mb-6">
           <label for="name" class="block mb-2 text-sm font-medium text-gray-900"
-            >Technologies</label
+            >Email</label
           >
           <DefaultInput
-            type="text"
-            :modelValue="form.technology"
-            @newValue="(newValue) => (form.technology = newValue)"
+            type="email"
+            :modelValue="form.email"
+            @newValue="(newValue) => (form.email = newValue)"
           />
         </div>
 
         <div class="mb-6">
           <label for="slug" class="block mb-2 text-sm font-medium text-gray-900"
-            >Skill</label
+            >Password</label
           >
           <DefaultInput
-            type="text"
-            :modelValue="form.skill"
-            @newValue="(newValue) => (form.skill = newValue)"
+            type="password"
+            :modelValue="form.password"
+            @newValue="(newValue) => (form.password = newValue)"
           />
         </div>
         <div class="mt-4">

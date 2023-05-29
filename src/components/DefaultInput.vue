@@ -12,8 +12,6 @@ const props = defineProps({
 
 <template>
   <input
-    type="text"
-    id="slug"
     class="input-text"
     :value="modelValue"
     @input="$emit('newValue', $event.target.value)"

@@ -1,24 +1,49 @@
 import { apiClient } from "./API.js";
 
 const SkillService = {
-  index() {
-    return apiClient.get("skills");
+  index(accessToken) {
+    return apiClient.get("skills", {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
   },
 
-  show(id) {
-    return apiClient.get("skills/" + id);
+  show(accessToken, id) {
+    return apiClient.get("skills/" + id, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
   },
 
-  store(payload) {
-    return apiClient.post("skills", payload);
+  store(accessToken, payload) {
+    return apiClient.post("skills", payload, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
   },
 
-  update(payload, id) {
-    return apiClient.put("skills/" + id, payload);
+  update(accessToken, payload, id) {
+    return apiClient.put("skills/" + id, payload, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
   },
 
-  delete(id) {
-    return apiClient.delete("skills/" + id);
+  delete(accessToken, id) {
+    return apiClient.delete("skills/" + id, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
   },
 };
 
