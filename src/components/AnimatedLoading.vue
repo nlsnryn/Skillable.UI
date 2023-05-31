@@ -17,7 +17,7 @@
   grid-area: 1/1;
   border: 8px solid;
   border-radius: 50%;
-  border-color: #4f46e5 #4f46e5 #0000 #0000;
+  border-color: #dc2626 #dc2626 #0000 #0000;
   mix-blend-mode: darken;
   animation: s4 1s infinite linear;
 }

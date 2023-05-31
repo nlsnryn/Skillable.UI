@@ -8,26 +8,53 @@ export const useSkillStore = defineStore("SkillStore", () => {
   const skills = ref([]);
   const skill = ref([]);
   const authStore = useAuthStore();
+  const router = useRouter();
   const token = authStore.credentials.token;
 
-  const router = useRouter();
-
   const getSkills = async () => {
+    const token = authStore.isAuthenticated()
+      ? authStore.credentials.token
+      : null;
+    if (!token) {
+      return;
+    }
+
     const response = await SkillService.index(token);
     skills.value = response.data;
   };
 
   const getSkill = async (id) => {
+    const token = authStore.isAuthenticated()
+      ? authStore.credentials.token
+      : null;
+    if (!token) {
+      return;
+    }
+
     const response = await SkillService.show(token, id);
     skill.value = response.data;
   };
 
   const storeSkill = async (data) => {
+    const token = authStore.isAuthenticated()
+      ? authStore.credentials.token
+      : null;
+    if (!token) {
+      return;
+    }
+
     await SkillService.store(token, data);
     router.push({ name: "SkillIndex" });
   };
 
   const updateSkill = async (id) => {
+    const token = authStore.isAuthenticated()
+      ? authStore.credentials.token
+      : null;
+    if (!token) {
+      return;
+    }
+
     await SkillService.update(token, skill.value, id);
     router.push({ name: "SkillIndex" });
   };
@@ -36,6 +63,13 @@ export const useSkillStore = defineStore("SkillStore", () => {
     if (!window.confirm("Are you sure?")) {
       return;
     }
+    const token = authStore.isAuthenticated()
+      ? authStore.credentials.token
+      : null;
+    if (!token) {
+      return;
+    }
+
     await SkillService.delete(token, id);
     await getSkills();
   };
@@ -46,6 +80,7 @@ export const useSkillStore = defineStore("SkillStore", () => {
   }
 
   return {
+    token,
     skill,
     skills,
     getSkills,

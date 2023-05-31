@@ -7,8 +7,17 @@ const AuthService = {
   register(payload) {
     return apiClient.post("register", payload);
   },
-  logout(payload) {
-    return apiClient.post("logout", payload);
+  logout(accessToken) {
+    return apiClient.post(
+      "logout",
+      {},
+      {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
   },
 };
 
