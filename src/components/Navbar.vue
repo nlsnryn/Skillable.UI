@@ -1,28 +1,21 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import { useAuthStore } from "@/stores/auth.store";
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import defaultButton from "./default-button.vue";
 import BaseModal from "./BaseModal.vue";
 
 const authStore = useAuthStore();
 const activeModal = ref(false);
-const isDashboard = ref(true);
+const state = reactive({
+  activeButton: null,
+});
 
-function forDashboard() {
-  if (isDashboard.value) {
-    return "bg-red-500";
-  } else {
-    return "bg-transparent";
-  }
+function handleClick(button) {
+  state.activeButton = button;
 }
-
-function forSkill() {
-  if (!isDashboard.value) {
-    return "bg-red-500";
-  } else {
-    return "bg-transparent";
-  }
+function isActiveButton(button) {
+  return state.activeButton === button ? "bg-red-500" : "transparent";
 }
 
 function toggleModal() {
@@ -51,16 +44,16 @@ function toggleModal() {
     <div class="space-x-5">
       <div v-if="authStore.isAuthenticated()" class="auth">
         <RouterLink
-          @click="isDashboard = true"
+          @click="handleClick('dashboard')"
           class="text-white px-4 py-2 hover:bg-red-500 rounded-md duration-150"
-          :class="forDashboard()"
+          :class="isActiveButton('dashboard')"
           to="/dashboard"
           >Dashboard</RouterLink
         >
         <RouterLink
-          @click="isDashboard = false"
+          @click="handleClick('skills')"
           class="text-white px-4 py-2 hover:bg-red-500 rounded-md duration-150 ml-2"
-          :class="forSkill()"
+          :class="isActiveButton('skills')"
           to="/skills"
           >Skills</RouterLink
         >

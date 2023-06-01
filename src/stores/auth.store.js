@@ -64,7 +64,6 @@ const useAuthStore = defineStore("auth", () => {
     }
 
     await AuthService.logout(credentials.value.token);
-    console.log("Logout");
     removeCredentials();
     credentials.value.token = "";
     credentials.value.user = "";

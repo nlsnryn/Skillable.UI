@@ -1,9 +1,11 @@
 <script setup>
 import { useSkillStore } from "@/stores/skill.store";
+import { useAuthStore } from "@/stores/auth.store";
 import { ref, onMounted } from "vue";
 import AnimatedLoading from "../components/AnimatedLoading.vue";
 
 const skillStore = useSkillStore();
+const authStore = useAuthStore();
 const totalCount = ref(0);
 const loading = ref(false);
 
@@ -18,7 +20,12 @@ onMounted(async () => {
 
 <template>
   <section>
-    <main v-if="!loading" class="max-w-2xl mx-auto text-center mt-40">
+    <div class="max-w-screen-xl w-full mt-24 p-4 text-start">
+      <h1 class="text-red-500 text-2xl">
+        Hi! {{ authStore.credentials.user.name }}
+      </h1>
+    </div>
+    <main v-if="!loading" class="max-w-2xl mx-auto text-center mt-12">
       <h1 class="text-red-500 font-bold text-4xl">Skillable App</h1>
       <h2 class="text-red-500 mt-2 text-lg">
         Store, Update, and Delete all your skills in skills section
